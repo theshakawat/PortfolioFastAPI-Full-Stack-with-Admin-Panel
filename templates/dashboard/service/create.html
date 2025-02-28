@@ -1,0 +1,37 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <h1 class="text-2xl font-bold mb-6">Create Service</h1>
+
+    <form method="post" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Title</label>
+            <input type="text" name="title" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea name="description" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" rows="3"></textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Icon ID</label>
+                <input type="text" name="icon_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Serial Number</label>
+                <input type="number" name="serial" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+        </div>
+
+        <div class="flex items-center">
+            <input type="checkbox" name="is_active" id="is_active" class="rounded border-gray-300 text-blue-600 shadow-sm">
+            <label for="is_active" class="ml-2 block text-sm text-gray-900">Active</label>
+        </div>
+
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Create Service</button>
+    </form>
+</div>
+{% endblock %}

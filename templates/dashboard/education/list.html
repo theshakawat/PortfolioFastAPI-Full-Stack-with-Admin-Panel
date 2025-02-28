@@ -1,0 +1,36 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="mb-4">
+    <h1 class="text-2xl font-bold mb-4">Educations</h1>
+    <a href="/admin/educations/create" class="bg-blue-500 text-white px-4 py-2 rounded">Add New</a>
+</div>
+
+<table class="w-full bg-white rounded-lg shadow overflow-hidden">
+    <thead class="bg-gray-50">
+        <tr>
+            <th class="px-6 py-3 text-left">Degree</th>
+            <th class="px-6 py-3 text-left">Organization</th>
+            <th class="px-6 py-3 text-left">Dates</th>
+            <th class="px-6 py-3 text-left">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for education in educations %}
+        <tr class="border-t">
+            <td class="px-6 py-4">{{ education.degree }}</td>
+            <td class="px-6 py-4">{{ education.organization_name }}</td>
+            <td class="px-6 py-4">
+                {{ education.from_date }} - {% if education.is_present %}Present{% else %}{{ education.to_date }}{% endif %}
+            </td>
+            <td class="px-6 py-4">
+                <a href="/admin/educations/edit/{{ education.id }}" class="text-blue-500 hover:text-blue-700 mr-2">Edit</a>
+                <form action="/admin/educations/delete/{{ education.id }}" method="post" class="inline">
+                    <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

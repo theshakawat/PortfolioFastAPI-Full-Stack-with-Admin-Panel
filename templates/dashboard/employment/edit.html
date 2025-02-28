@@ -1,0 +1,91 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">Edit Employment</h1>
+
+    <form method="post" class="space-y-4">
+        {% if error %}
+        <div class="bg-red-100 text-red-700 p-3 mb-4 rounded">{{ error }}</div>
+        {% endif %}
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Position Title</label>
+            <input type="text" name="position" value="{{ employment.position }}" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                <input type="date" name="from_date" value="{{ employment.from_date }}" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">End Date</label>
+                <input type="date" name="to_date" value="{{ employment.to_date }}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                       {{ 'disabled' if employment.is_present }}>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Organization</label>
+                <input type="text" name="organization_name" value="{{ employment.organization_name }}" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Location</label>
+                <input type="text" name="location" value="{{ employment.location }}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Website</label>
+            <input type="url" name="website" value="{{ employment.website }}"
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Responsibilities</label>
+            <textarea name="responsibilities" required rows="4"
+                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ employment.responsibilities }}</textarea>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Achievements</label>
+            <textarea name="achievement" rows="3"
+                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ employment.achievement }}</textarea>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center">
+                <input type="checkbox" name="is_active" id="is_active"
+                       class="rounded border-gray-300 text-blue-600 shadow-sm"
+                       {{ 'checked' if employment.is_active }}>
+                <label for="is_active" class="ml-2 text-sm text-gray-900">Active</label>
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" name="is_present" id="is_present"
+                       class="rounded border-gray-300 text-blue-600 shadow-sm"
+                       {{ 'checked' if employment.is_present }}>
+                <label for="is_present" class="ml-2 text-sm text-gray-900">Currently Working</label>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Update Employment
+            </button>
+            <form action="/admin/employments/delete/{{ employment.id }}" method="post">
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                        onclick="return confirm('Permanently delete this employment record?')" style="display: none;">
+                    Delete
+                </button>
+            </form>
+        </div>
+    </form>
+</div>
+{% endblock %}

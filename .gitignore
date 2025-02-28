@@ -1,0 +1,67 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+*.env
+.venv/
+env/
+ENV/
+
+# Package management
+pip-log.txt
+pip-delete-this-directory.txt
+
+# macOS system files
+.DS_Store
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and debug files
+logs/
+*.log
+
+# Database and migrations
+db.sqlite3
+db.sqlite3-shm
+db.sqlite3-wal
+src/db/*.sqlite3
+src/db/__pycache__/
+
+# Tortoise ORM migrations
+migrations/
+alembic/
+
+# Compiled files
+*.so
+
+# Jupyter Notebook checkpoints (if used)
+.ipynb_checkpoints/
+
+# Cache
+*.cache
+__pycache__/
+build/
+dist/
+
+# FastAPI static and temp files
+staticfiles/
+media/
+
+# Pytest and test-related
+htmlcov/
+.coverage
+.cache/
+pytest_cache/
+junitxml/
+
+# Docker
+docker-compose.override.yml
+*.dockerfile

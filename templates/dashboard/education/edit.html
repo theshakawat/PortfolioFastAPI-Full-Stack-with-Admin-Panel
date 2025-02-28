@@ -1,0 +1,85 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">Edit Education</h1>
+
+    <form method="post" class="space-y-4">
+        {% if error %}
+        <div class="bg-red-100 text-red-700 p-3 mb-4 rounded">{{ error }}</div>
+        {% endif %}
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Degree Title</label>
+            <input type="text" name="degree" value="{{ education.degree }}" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Start Date</label>
+                <input type="date" name="from_date" value="{{ education.from_date }}" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">End Date</label>
+                <input type="date" name="to_date" value="{{ education.to_date }}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                       {{ 'disabled' if education.is_present }}>
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Institution Name</label>
+            <input type="text" name="organization_name" value="{{ education.organization_name }}" required
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Location</label>
+                <input type="text" name="location" value="{{ education.location }}" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Website</label>
+                <input type="url" name="website" value="{{ education.website }}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea name="description" rows="3"
+                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ education.description }}</textarea>
+        </div>
+
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center">
+                <input type="checkbox" name="is_active" id="is_active"
+                       class="rounded border-gray-300 text-blue-600 shadow-sm"
+                       {{ 'checked' if education.is_active }}>
+                <label for="is_active" class="ml-2 text-sm text-gray-900">Active</label>
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" name="is_present" id="is_present"
+                       class="rounded border-gray-300 text-blue-600 shadow-sm"
+                       {{ 'checked' if education.is_present }}>
+                <label for="is_present" class="ml-2 text-sm text-gray-900">Currently Studying</label>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Update Education
+            </button>
+            <form action="/admin/educations/delete/{{ education.id }}" method="post">
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                        onclick="return confirm('Are you sure you want to delete this education entry?')" style="display: none;">
+                    Delete Education
+                </button>
+            </form>
+        </div>
+    </form>
+</div>
+{% endblock %}

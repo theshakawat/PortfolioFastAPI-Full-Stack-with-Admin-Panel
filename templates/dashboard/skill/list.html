@@ -1,0 +1,45 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="mb-4">
+    <h1 class="text-2xl font-bold mb-4">Skills Management</h1>
+    <a href="/admin/skills/create" class="bg-blue-500 text-white px-4 py-2 rounded">Add New Skill</a>
+</div>
+
+<table class="w-full bg-white rounded-lg shadow overflow-hidden">
+    <thead class="bg-gray-50">
+        <tr>
+            <th class="px-6 py-3 text-left">Skill</th>
+            <th class="px-6 py-3 text-left">Proficiency</th>
+            <th class="px-6 py-3 text-left">Order</th>
+            <th class="px-6 py-3 text-left">Status</th>
+            <th class="px-6 py-3 text-left">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for skill in skills %}
+        <tr class="border-t">
+            <td class="px-6 py-4">{{ skill.title }}</td>
+            <td class="px-6 py-4">
+                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                    <div class="bg-blue-600 h-2.5 rounded-full" style="width: {{ skill.percent }}%"></div>
+                </div>
+                <span class="text-sm text-gray-600">{{ skill.percent }}%</span>
+            </td>
+            <td class="px-6 py-4">{{ skill.serial }}</td>
+            <td class="px-6 py-4">
+                <span class="px-2 py-1 text-sm rounded-full {{ 'bg-green-100 text-green-800' if skill.is_active else 'bg-red-100 text-red-800' }}">
+                    {{ 'Active' if skill.is_active else 'Inactive' }}
+                </span>
+            </td>
+            <td class="px-6 py-4">
+                <a href="/admin/skills/edit/{{ skill.id }}" class="text-blue-500 hover:text-blue-700 mr-2">Edit</a>
+                <form action="/admin/skills/delete/{{ skill.id }}" method="post" class="inline">
+                    <button type="submit" class="text-red-500 hover:text-red-700" onclick="return confirm('Delete this skill?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

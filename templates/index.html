@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+
+    <title>{{profile.name}}</title>
+
+    <!--=====================================================
+        CSS Stylesheets
+    =====================================================-->
+    <link rel='stylesheet' type='text/css' href='static/bootstrap/css/bootstrap.min.css'>
+    <link rel='stylesheet' type='text/css' href='static/css/linea.css'>
+    <link rel='stylesheet' type='text/css' href='static/css/ionicons.min.css'>
+    <link rel='stylesheet' type='text/css' href='static/css/owl.carousel.css'>
+    <link rel='stylesheet' type='text/css' href='static/css/magnific-popup.css'>
+    <link rel='stylesheet' type='text/css' href='static/css/style.css'>
+
+</head>
+<body>
+
+
+<!--=====================================================
+    Preloader
+=====================================================-->
+<div id='preloader'>
+    <div class='loader'></div>
+    <div class='left'></div>
+    <div class='right'></div>
+</div>
+
+<div class='main-content'>
+
+    <!--=====================================================
+        Page Borders
+    =====================================================-->
+    <div class='page-border border-left'></div>
+    <div class='page-border border-right'></div>
+    <div class='page-border border-top'></div>
+    <div class='page-border border-bottom'></div>
+
+    <!--=====================================================
+        Menu Button
+    =====================================================-->
+    <a href='#' class='menu-btn'>
+				<span class='lines'>
+					<span class='l1'></span>
+					<span class='l2'></span>
+					<span class='l3'></span>
+				</span>
+    </a>
+
+    <!--=====================================================
+        Menu
+    =====================================================-->
+    <div class='menu'>
+        <div class='inner'>
+            <ul class='menu-items'>
+                <li>
+                    <a href='#' class='section-toggle' data-section='intro'>
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href='#about' class='section-toggle' data-section='about'>
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a href='#resume' class='section-toggle' data-section='resume'>
+                        Resume
+                    </a>
+                </li>
+                <li>
+                    <a href='#portfolio' class='section-toggle' data-section='portfolio'>
+                        Portfolio
+                    </a>
+                </li>
+                <li>
+                    <a href='#contact' class='section-toggle' data-section='contact'>
+                        Contact
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class='animation-block'></div>
+
+    <!--=====================================================
+        Sections
+    =====================================================-->
+    <div class='sections'>
+
+        <!--=====================================================
+            Main Section
+        =====================================================-->
+        <section id='intro' class='section section-main active'>
+            <div class='container-fluid'>
+                <div class='v-align'>
+                    <div class='inner'>
+                        <div class='intro-text'>
+                            <h1>I'm {{ profile.name.split(' ')[1] if profile and profile.name else "Guest" }}</h1>
+                            <p>
+                                {{profile.bio_title}}
+                            </p>
+                            <div class='intro-btns'>
+                                <a href='#about' class='btn-custom section-toggle' data-section='about'>
+                                    Discover More
+                                </a>
+                                <a href='#contact' class='btn-custom section-toggle' data-section='contact'>
+                                    Hire Me
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=====================================================
+            About Section
+        =====================================================-->
+        <section id='about' class='section about-section border-d'>
+            <div class='section-block about-block'>
+                <div class='container-fluid'>
+                    <div class='section-header'>
+                        <h2>
+                            I'm a <strong class='color'>{{profile.job_title}}</strong>
+                        </h2>
+                    </div>
+                    <div class='row'>
+                        <div class='col-md-4'>
+                            <ul class='info-list'>
+                                <li>
+                                    <strong>Name:</strong>
+                                    <span>{{profile.name}}</span>
+                                </li>
+                                <li>
+                                    <strong>Email:</strong>
+                                    <span>{{profile.email}}</span>
+                                </li>
+                                <li>
+                                    <strong>Nationality:</strong>
+                                    <span>{{profile.nationality}}</span>
+                                </li>
+                                <li>
+                                    <strong>Language:</strong>
+                                    <span>{{profile.spoken_language}}</span>
+                                </li>
+                                <li>
+                                    <strong>Freelance:</strong>
+                                    <span>{{profile.freelance}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class='col-md-8'><br>
+                            <div class='about-text'>
+                                <p>
+                                    {{profile.bio | safe }}
+                                </p>
+                            </div>
+                            <div class='about-btns'>
+                                <a href='{{profile.cv_url}}' class='btn-custom btn-color' target="_blank">
+                                    Download Resume
+                                </a>
+                                <a href='#contact' class='btn-custom btn-color'>
+                                    Hire Me
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class='section-block services-block'>
+                <div class='container-fluid'>
+                    <div class='section-header'>
+                        <h2>My <strong class='color'>Services</strong></h2>
+                    </div>
+                    <div class='row'>
+                        {% for iServices in services %}
+                        <div class='col-md-4'>
+                            <div class='service'>
+                                <div class='icon'>
+                                    <i class='{{iServices.icon_id}}'></i>
+                                </div>
+                                <div class='content'>
+                                    <h4>{{iServices.title}}</h4>
+                                    <p>
+                                        {{iServices.description}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class='section-block skills-block'>
+                <div class='container-fluid'>
+                    <div class='section-header'>
+                        <h2>
+                            My <strong class='color'>Skills</strong>
+                        </h2>
+                    </div>
+                    <div class='row'>
+                        {% for iSkills in skills %}
+                        <div class='col-md-6'>
+                            <div class='skill'>
+                                <h4>{{iSkills.title}}</h4>
+                                <div class='bar'>
+                                    <div class='percent' style='width:{{iSkills.percent}}%;'></div>
+                                </div>
+                            </div>
+                            <br><br>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=====================================================
+            Resume Section
+        =====================================================-->
+        <section id='resume' class='section resume-section border-d'>
+            <div class='section-block timeline-block'>
+                <div class='container-fluid'>
+                    <div class='section-header'>
+                        <h2>My <strong class='color'>Education</strong></h2>
+                    </div>
+                    <ul class='timeline'>
+                        {% for iEducation in education %}
+                        <li>
+                            <div class='timeline-content'>
+                                <h4>{{iEducation.organization_name}}, {{iEducation.location}}</h4>
+                                <em>
+                                    <span>{{iEducation.degree}}</span>
+                                    <span>{{iEducation.from_date}} - {{iEducation.to_date}}</span>
+                                </em>
+                                <p>
+                                    {{iEducation.description}}
+                                </p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class='section-block timeline-block'>
+                <div class='container-fluid'>
+                    <div class='section-header'>
+                        <h2>My <strong class='color'>Experience</strong></h2>
+                    </div>
+                    <ul class='timeline'>
+                        {% for iEmployment in employment %}
+                        <li>
+                            <div class='timeline-content'>
+                                <h4>{{iEmployment.organization_name}}, {{iEmployment.location}}</h4>
+                                <em>
+                                    <span>{{iEmployment.position}}</span>
+                                    <span>{{iEmployment.from_date}} - {% if iEmployment.is_present %} Present {% else %} {{iEmployment.to_date}}{% endif %}</span>
+                                </em>
+                                <p>
+                                    <strong>Responsibilities</strong>: {{iEmployment.responsibilities}}
+                                </p>
+                                <p>
+                                    <strong>Achievement</strong>: {{iEmployment.achievement}}
+                                </p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class='section-block testimonials-block'>
+                <div class='container-fluid'>
+                    <div class='section-header'>
+                        <h2>My <strong class='color'>Testimonials</strong></h2>
+                    </div>
+                    <div class='testimonials-slider'>
+                        {% for iTestimonials in testimonials %}
+                        <div class='testimonial'>
+                            <div class='icon'>
+                                <i class='ion-quote'></i>
+                            </div>
+                            <p>{{iTestimonials.quote}}</p>
+                            <div class='author'>
+                                <h4>{{iTestimonials.quote_owner}}</h4>
+                                <span>{{iTestimonials.role}}</span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=====================================================
+            Portfolio Section
+        =====================================================-->
+        <section id='portfolio' class='section portfolio-section border-d'>
+            <div class='section-block portfolio-block'>
+                <div class='container-fluid'>
+                    <div class='section-header'>
+                        <h2>My <strong class='color'>Works</strong></h2>
+                    </div>
+                    <ul class='portfolio-filters'>
+                        {% for iportfolio_unique_types in portfolio_unique_types %}
+                        <li>
+                            <a>
+                                {{iportfolio_unique_types}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    <ul class="timeline-new">
+                        {% for iPortfolio in portfolio %}
+                        <li class="portfolio-item-new" style="display: flex; flex-direction: column; gap: 10px;">
+                            <div class="timeline-content">
+                                <h4>{{ iPortfolio.title }}</h4>
+                                <span>Project Type: {{ iPortfolio.type }}</span><br><br>
+                                <p><strong>Description:</strong> {{ iPortfolio.description }}</p>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <p><strong>Technology:</strong> {{ iPortfolio.technology }}</p>
+                                    <a class="btn btn-primary" href="{{ iPortfolio.client }}" target="_blank">
+                                        Company
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!--=====================================================
+            Contact Section
+        =====================================================-->
+        <section id='contact' class='section contact-section border-d'>
+            <div class='section-block contact-block'>
+                <div class='container-fluid'>
+                    <div class='section-header'>
+                        <h2>Contact <strong class='color'>Me</strong></h2>
+                    </div>
+                    <div class='row'>
+                        <div>
+                            <div>
+                                <form id="contactForm">
+                                    <div class='row'>
+                                        <div class='col-md-6'>
+                                            <div class='form-group'>
+                                                <input type='text' class='form-control' placeholder='Name' name='name'
+                                                       required>
+                                            </div>
+                                        </div>
+                                        <div class='col-md-6'>
+                                            <div class='form-group'>
+                                                <input type='email' class='form-control' placeholder='Email'
+                                                       name='email' required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class='form-group'>
+                                        <input type='text' class='form-control' placeholder='Subject' name='subject'
+                                               required>
+                                    </div>
+                                    <div class='form-group'>
+                                        <textarea class='form-control' placeholder='Message' name='message' rows='5'
+                                                  required></textarea>
+                                    </div>
+                                    <div class='form-group text-center'>
+                                        <button type='submit' id="submitButton" class='btn-custom btn-color'>
+                                            Send Message
+                                        </button>
+                                    </div>
+                                </form>
+
+                                <!-- Success/Error Message Display -->
+                                <div id="messageContainer" style="margin-top: 10px; display: none;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            document.getElementById("contactForm").addEventListener("submit", async function(event) {
+                event.preventDefault();  // Prevent default page reload
+
+                let formData = new FormData(this);
+                let messageContainer = document.getElementById("messageContainer");
+                let submitButton = document.getElementById("submitButton");
+
+                // Change button text to show loading
+                submitButton.innerHTML = "Sending Message... Please wait.";
+                submitButton.disabled = true; // Disable button to prevent multiple clicks
+
+                try {
+                    let response = await fetch("/send-email", {
+                        method: "POST",
+                        body: formData
+                    });
+
+                    let result = await response.json();
+
+                    // Show success or error message
+                    if (result.success) {
+                        messageContainer.innerHTML = "<p style='color: green; font-weight: bold;'>" + result.message + "</p>";
+                        this.reset(); // Clear form fields after successful submission
+                    } else {
+                        messageContainer.innerHTML = "<p style='color: red; font-weight: bold;'>Failed to send email. Please try again.</p>";
+                    }
+                } catch (error) {
+                    messageContainer.innerHTML = "<p style='color: red; font-weight: bold;'>An error occurred. Try again later.</p>";
+                }
+
+                // Reset button text and enable it
+                submitButton.innerHTML = "Send Message";
+                submitButton.disabled = false;
+                messageContainer.style.display = "block";
+            });
+        </script>
+
+    </div>
+</div>
+
+<!--=====================================================
+    JavaScript Files
+=====================================================-->
+<script src='static/js/jquery.min.js'></script>
+<script src='static/js/jquery.shuffle.min.js'></script>
+<script src='static/js/owl.carousel.min.js'></script>
+<script src='static/js/jquery.magnific-popup.min.js'></script>
+<script src='static/js/validator.min.js'></script>
+<script src='static/js/script.js'></script>
+
+</body>
+</html>

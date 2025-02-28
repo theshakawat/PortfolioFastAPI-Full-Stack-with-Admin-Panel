@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-gray-800 min-h-screen p-4">
+            <div class="text-white text-xl font-bold mb-8"><a href="/admin">Admin Panel</a></div>
+            <nav class="space-y-2">
+                <a href="/" class="block text-gray-300 hover:bg-gray-700 p-2 rounded" target="_blank">Visit Portfolio</a>
+                <a href="/admin/profile" class="block text-gray-300 hover:bg-gray-700 p-2 rounded">Profile</a>
+                <a href="/admin/services" class="block text-gray-300 hover:bg-gray-700 p-2 rounded">Services</a>
+                <a href="/admin/skills" class="block text-gray-300 hover:bg-gray-700 p-2 rounded">Skills</a>
+                <a href="/admin/educations" class="block text-gray-300 hover:bg-gray-700 p-2 rounded">Education</a>
+                <a href="/admin/employments" class="block text-gray-300 hover:bg-gray-700 p-2 rounded">Employment</a>
+                <a href="/admin/testimonials" class="block text-gray-300 hover:bg-gray-700 p-2 rounded">Testimonials</a>
+                <a href="/admin/portfolios" class="block text-gray-300 hover:bg-gray-700 p-2 rounded">Portfolio</a>
+                <a href="/admin/logout" class="block text-gray-300 hover:bg-gray-700 p-2 rounded">Logout</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</body>
+</html>

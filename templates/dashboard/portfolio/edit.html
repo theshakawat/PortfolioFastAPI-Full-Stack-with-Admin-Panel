@@ -1,0 +1,96 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto p-6">
+    <h1 class="text-2xl font-bold mb-6">Edit Portfolio Item</h1>
+
+    <form method="post" class="space-y-4">
+        {% if error %}
+        <div class="bg-red-100 text-red-700 p-3 mb-4 rounded">{{ error }}</div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Title</label>
+                <input type="text" name="title" value="{{ portfolio.title }}" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Type</label>
+                <select name="type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                    {% for iportfolio_type in portfolio_unique_types %}
+                    <option value="{{ iportfolio_type }}" {% if portfolio.type== iportfolio_type %}selected{% endif %}>
+                        {{ iportfolio_type }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Description</label>
+            <textarea name="description" rows="4"
+                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">{{ portfolio.description }}</textarea>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Client</label>
+                <input type="text" name="client" value="{{ portfolio.client }}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Project URL</label>
+                <input type="url" name="project_url" value="{{ portfolio.project_url }}"
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Image URL</label>
+            <input type="url" name="image_url" value="{{ portfolio.image_url }}"
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Technologies Used</label>
+            <input type="text" name="technology" value="{{ portfolio.technology }}"
+                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                   placeholder="Comma separated technologies (e.g., React, Python, AWS)">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="flex items-center">
+                <input type="checkbox" name="is_open_source" id="is_open_source"
+                       class="rounded border-gray-300 text-blue-600 shadow-sm"
+                       {{ 'checked' if portfolio.is_open_source }}>
+                <label for="is_open_source" class="ml-2 text-sm text-gray-900">Open Source</label>
+            </div>
+            <div class="flex items-center">
+                <input type="checkbox" name="is_active" id="is_active"
+                       class="rounded border-gray-300 text-blue-600 shadow-sm"
+                       {{ 'checked' if portfolio.is_active }}>
+                <label for="is_active" class="ml-2 text-sm text-gray-900">Active</label>
+            </div>
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Serial Number</label>
+                <input type="number" name="serial" value="{{ portfolio.serial }}" required
+                       class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center">
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Update Portfolio
+            </button>
+            <form action="/admin/portfolios/delete/{{ portfolio.id }}" method="post">
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+                        onclick="return confirm('Permanently delete this portfolio item?')" style="display: none;">
+                    Delete
+                </button>
+            </form>
+        </div>
+    </form>
+</div>
+{% endblock %}
